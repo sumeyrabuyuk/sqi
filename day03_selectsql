@@ -1,0 +1,93 @@
+CREATE TABLE ogrenciler1
+    (
+        id NUMBER(9),
+        isim VARCHAR2(50),
+        adres VARCHAR2(100),
+        sinav_notu NUMBER(3)
+    );
+    INSERT INTO ogrenciler1 VALUES(123, 'Ali Can', 'Ankara',75);
+    INSERT INTO ogrenciler1 VALUES(124, 'Merve Gul', 'Ankara',85);
+    INSERT INTO ogrenciler1 VALUES(125, 'Kemal Yasa', 'Istanbul',85);
+    select * from ogrenciler1;
+    
+    
+    /* ============================================================================
+   Verileri SELECT komutu ile veritaban?ndan çekerken filtreleme yapmak için 
+   
+   Syntax
+   --------
+    SELECT ile birlikte WHERE komutu kullan?labilir. 
+   
+    SELECT sutün1, sutün2
+        ...
+    FROM  tablo_ad? WHERE ko?ul;
+==============================================================================*/
+    
+    --ornek1 sinav notu 80 den buyuk olan tum ogrencileri listele
+    select * from ogrenciler1
+    where sinav_notu>80;
+    
+    
+    --ornek2: adresi  ankara olan ogrencilerin isim ve adres bilgilerini listele
+    select isim , adres FROM ogrenciler1
+    where adres= 'Ankara';
+    
+    --ornek3 id si 124 olan ogrencilerin tüm bilgilerini sil
+    delete from ogrenciler1
+    where id=124;
+    
+        
+    ------------select-BETWEEN------
+    
+    
+    CREATE TABLE personel
+    (
+        id CHAR(5),
+        isim VARCHAR2(50),
+        maas NUMBER(5)
+    );
+    DROP TABLE personel;
+    INSERT INTO personel VALUES('10001', 'Ahmet Aslan', 7000);
+    INSERT INTO personel VALUES( '10002', 'Mehmet Y?lmaz' ,12000);
+    INSERT INTO personel VALUES('10003', 'Meryem ', 7215);
+    INSERT INTO personel VALUES('10004', 'Veli Han', 5000);
+    INSERT INTO personel VALUES('10005', 'Mustafa Ali', 5500);
+    INSERT INTO personel VALUES('10005', 'Ay?e Can', 4000);
+    SELECT * FROM personel;
+    
+    --orne4: id si 10002 ile 10005 arasinda olan personel?n bilgilerini listele
+    --1.yontem:
+    select * from personel
+    where id between '10002' AND '10005';/--BETWEEN DE ?LK VE SON DEGER DAH?L
+    --2. YONTEM:
+    SELECT * FROM personel
+    where id>='10002' AND id<='10005';
+    
+    --ornek5: ismi Mehmet Y?lmaz ve veli han arasindaki personel bilgilerini goruntule.
+    
+    select *from personel
+    where isim between 'Mehmet Y?lmaz' and 'Veli Han';
+    
+    --ornek6: id si 10002-10004 arasinda olmayan personli maasini listele.
+    
+    select id,maas from personel
+    where id NOT between '10002' and '10004';
+    
+    ---SELECT -?N --------
+    
+    /* ======================= SELECT - IN ======================================
+    IN birden fazla mant?ksal ifade ile tan?mlayabilece?imiz durumlar? 
+    tek komutla yazabilme imkân? verir
+    SYNTAX:
+    -------
+    SELECT sutun1,sutun2, ...
+    FROM tablo_ad?
+    WHERE sutun_ad? IN (deger1, deger2, ...);
+/* ========================================================================== */
+    
+    --ornek7: maasi 4000,5000,7000 olan personelin bilgilerini listele
+    SELECT * FROM personel
+    WHERE maas IN(4000,5000,7000);
+    
+    
+    
